@@ -1,0 +1,9 @@
+[submodule "src/detections"]
+	path = src/detections
+	url = git@github.com:ECE4600-2023-G03/detections.git
+[submodule "src/uart-bridge"]
+	path = src/uart-bridge
+	url = git@github.com:ECE4600-2023-G03/uart-bridge.git
+[submodule "src/camera_distributor"]
+	path = src/camera_distributor
+	url = git@github.com:ECE4600-2023-G03/camera_distributor.git
