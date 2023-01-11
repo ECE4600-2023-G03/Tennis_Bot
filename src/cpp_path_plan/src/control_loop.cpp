@@ -23,8 +23,8 @@
 #define SPIN_SPEED                  105               // Constant Speed of the robot while it's spinning
 
 // PID 
-#define P_WEIGHT      0.2
-#define I_WEIGHT      0.1
+#define P_WEIGHT      0.3
+#define I_WEIGHT      0.2
 
 
 using std::placeholders::_1;
@@ -110,22 +110,22 @@ private:
         }
 
         //successfuly turned towards ball
-        if(p_error < 100 && p_error > -100){
+        if(p_error < 300 && p_error > -300){
           turn = false;        // Reset the turn timer if we are on track
           turn_cnt = 0;
         }
 
         // If we need to turn (1s )
         if(turn == true){
-          total_error = P_WEIGHT*p_error + I_WEIGHT*i_error;
-          if(total_error > 2)
-            total_error = 2;
+          total_error = abs(P_WEIGHT*p_error + I_WEIGHT*i_error);   // Combine the P and I errors
+          if(total_error > 2000)
+            total_error = 2000;
 
           if(p_error > 1){
             twist.angular.z = -total_error/4032*127 + 128;                 // PID control of angular speed
           }
           if(p_error < -1){
-            twist.angular.z = abs(total_error)/4032*127 + 128;      // PID control of angular speed
+            twist.angular.z = total_error/4032*127 + 128;      // PID control of angular speed
           }
           
           twist.linear.x = 0;      // Set the linear speed of the robot to a constant rate
