@@ -20,6 +20,8 @@ add_compile_options(-g)
 add_executable(control_loop src/control_loop.cpp)
 ament_target_dependencies(control_loop rclcpp detections geometry_msgs std_msgs)
 
+add_compile_options(-g)
+
 add_executable(greedy_detect_sel src/greedy_detect_sel.cpp)
 ament_target_dependencies(greedy_detect_sel rclcpp detections)
 

@@ -36,7 +36,7 @@ public:
 private:
 
   // Scores a ball on how likely the ball is the closest ball in frame
-  int detect_score(const detections::msg::Detection & detect) const{
+  float detect_score(const detections::msg::Detection & detect) const{
     float ret = 0;
 
     // Calculate the area (bigger area in camera = closer)
@@ -81,35 +81,39 @@ private:
           starting_ind++;
       }
 
-      closest_detect = msg.detections[starting_ind];
-      copy_bounds(&msg.detections[starting_ind].bounds[starting_ind], &closest_detect.bounds[starting_ind]);
+      if(starting_ind < msg.num_detections){
 
-      closest_ball_score = detect_score(closest_detect);
+        closest_detect = msg.detections[starting_ind];
+        copy_bounds(&msg.detections[starting_ind].bounds[starting_ind], &closest_detect.bounds[starting_ind]);
 
-      for(int i = starting_ind + 1; i < msg.num_detections; i++){
-        float score_cmp = 0;
-        
-        if(msg.detections[starting_ind].index == TENNIS_BALL_INDX){
+        closest_ball_score = detect_score(closest_detect);
 
-          detect = msg.detections[i];
-          copy_bounds(&msg.detections[i].bounds[0], &detect.bounds[0]);
-        
-          score_cmp = detect_score(detect);
+        for(int i = starting_ind + 1; i < msg.num_detections; i++){
+          float score_cmp = 0;
+          
+          if(msg.detections[starting_ind].index == TENNIS_BALL_INDX){
 
-          if(score_cmp > closest_ball_score){
-            copy_bounds(&detect.bounds[0], &closest_detect.bounds[0]);
-            closest_ball_score = score_cmp;
-            closest_detect = detect;
-            ret_ind = i;
+            detect = msg.detections[i];
+            copy_bounds(&msg.detections[i].bounds[0], &detect.bounds[0]);
+          
+            score_cmp = detect_score(detect);
+
+            if(score_cmp > closest_ball_score){
+              copy_bounds(&detect.bounds[0], &closest_detect.bounds[0]);
+              closest_ball_score = score_cmp;
+              closest_detect = detect;
+              ret_ind = i;
+            }
+
           }
 
         }
 
-      }
+        RCLCPP_INFO_STREAM(this->get_logger(), "Detection #: '" << ret_ind << ", is the closest detection");     // CHANGE
 
-      RCLCPP_INFO_STREAM(this->get_logger(), "Detection #: '" << ret_ind << ", is the closest detection");     // CHANGE
+        publisher_->publish(closest_detect);
 
-      publisher_->publish(closest_detect);
+      }// If starting_ind < num_detections
 
     }
     

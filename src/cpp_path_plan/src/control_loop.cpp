@@ -118,8 +118,8 @@ private:
         // If we need to turn (1s )
         if(turn == true){
           total_error = P_WEIGHT*p_error + I_WEIGHT*i_error;
-          if(total_error > 5)
-            total_error = 5;
+          if(total_error > 2)
+            total_error = 2;
 
           if(p_error > 1){
             twist.angular.z = -total_error/4032*127 + 128;                 // PID control of angular speed
@@ -150,7 +150,7 @@ private:
             i_error_arr[i] = 0;
     }
   
-    RCLCPP_INFO_STREAM(this->get_logger(), "Twist: Angular- " << twist.angular.z << " Linear- " << twist.linear.x << " Turning: " << turn << " Turn cnt: " << turn_cnt << " Valid: " << valid_detection );     // CHANGE
+    RCLCPP_INFO_STREAM(this->get_logger(), "Twist: Angular- " << twist.angular.z << " Linear- " << twist.linear.x << " Turning: " << turn << " Turn cnt: " << turn_cnt << " Valid: " << valid_detection << " Total Error: " << total_error);     // CHANGE
 
     publisher_->publish(twist);
 
