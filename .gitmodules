@@ -7,9 +7,6 @@
 [submodule "src/camera_distributor"]
 	path = src/camera_distributor
 	url = git@github.com:ECE4600-2023-G03/camera_distributor.git
-[submodule "cpp_path_plan"]
-	path = cpp_path_plan
-	url = git@github.com:ECE4600-2023-G03/cpp_path_plan.git
 [submodule "src/state_interface"]
 	path = src/state_interface
 	url = git@github.com:ECE4600-2023-G03/state_interface.git
