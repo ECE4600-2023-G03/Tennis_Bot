@@ -19,3 +19,6 @@
 [submodule "src/cpp_path_plan"]
 	path = src/cpp_path_plan
 	url = git@github.com:ECE4600-2023-G03/cpp_path_plan.git
+[submodule "website"]
+	path = website
+	url = git@github.com:ECE4600-2023-G03/website.git
