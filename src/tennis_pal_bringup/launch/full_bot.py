@@ -1,7 +1,16 @@
+import os, sys
+
+from ament_index_python import get_package_share_directory
 
 
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
+from launch.substitutions import TextSubstitution
+from launch.substitutions import LaunchConfiguration
+
 
 def generate_launch_description():
     ld = LaunchDescription()
@@ -35,11 +44,29 @@ def generate_launch_description():
         executable="state_machine"
     )
 
+    # ros2 run web_video_server web_video_server
+    web_video_server = Node(
+            package='web_video_server',
+            executable='web_video_server',
+        )
+
+    # include xml launch file
+    rosbridge = IncludeLaunchDescription(
+        XMLLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory("rosbridge_server"),
+                "launch/rosbridge_websocket_launch.xml",
+            )
+        )
+    )
+
     ld.add_action(path_plan_node)
     ld.add_action(control_node)
     ld.add_action(detection)
     ld.add_action(uart_bridge)
     ld.add_action(pilot)
     ld.add_action(state_machine)
+    ld.add_action(web_video_server)
+    ld.add_action(rosbridge)
 
     return ld
