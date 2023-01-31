@@ -17,7 +17,7 @@ def generate_launch_description():
 
     path_plan_node = Node(
         package="cpp_path_plan",
-        executable="greedy_detect_sel",
+        executable="path_planner",
     )
 
     control_node = Node(
