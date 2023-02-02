@@ -44,6 +44,11 @@ def generate_launch_description():
         executable="state_machine"
     )
 
+    ui_translation = Node(
+        package="ui_translation",
+        executable="ui_translation"
+    )
+
     # ros2 run web_video_server web_video_server
     web_video_server = Node(
             package='web_video_server',
@@ -66,6 +71,7 @@ def generate_launch_description():
     ld.add_action(uart_bridge)
     ld.add_action(pilot)
     ld.add_action(state_machine)
+    ld.add_action(ui_translation)
     ld.add_action(web_video_server)
     ld.add_action(rosbridge)
 
