@@ -20,11 +20,6 @@ def generate_launch_description():
         executable="path_planner",
     )
 
-    control_node = Node(
-        package="cpp_path_plan",
-        executable="control_loop",
-    )
-
     detection = Node(
         package="camera_distributor",
         executable="distributor"
@@ -66,7 +61,6 @@ def generate_launch_description():
     )
 
     ld.add_action(path_plan_node)
-    ld.add_action(control_node)
     ld.add_action(detection)
     ld.add_action(uart_bridge)
     ld.add_action(pilot)
