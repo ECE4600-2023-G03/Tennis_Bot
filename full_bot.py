@@ -18,6 +18,7 @@ def generate_launch_description():
     path_plan_node = Node(
         package="cpp_path_plan",
         executable="path_planner",
+        parameters=['/home/G03/workspace/config/path_plan_params.yaml']
     )
 
     detection = Node(
