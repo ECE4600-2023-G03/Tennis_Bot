@@ -1,6 +1,9 @@
 from ros:humble
+ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt update && \
+RUN apt-get update &&\
+    apt-get update --fix-missing && \
+    apt-get install -y -f &&\
     apt install -y \
     ros-humble-rviz2
 
@@ -167,17 +170,18 @@ RUN set -x && \
   apt-get autoremove -y -qq && \
   rm -rf /var/lib/apt/lists/*
 
-WORKDIR /ros2_ws
-COPY . /ros2_ws/src/stella_vslam_ros
+WORKDIR /home/G03/workspace
+COPY . /home/G03/workspace/src/stella_vslam_ros
 
 # SKIPS WEB_VIDEO SERVER
 RUN set -x && \
   : "build ROS2 packages" && \
   bash -c "source /opt/ros/${ROS_DISTRO}/setup.bash; \
-  colcon build --parallel-workers ${NUM_THREADS} --cmake-args --packages-skip web_video_server \
+  colcon build --parallel-workers ${NUM_THREADS} --cmake-args \
     -DUSE_PANGOLIN_VIEWER=ON \
     -DUSE_SOCKET_PUBLISHER=OFF \
-    -DUSE_STACK_TRACE_LOGGER=ON"
+    -DUSE_STACK_TRACE_LOGGER=ON \
+    --packages-skip web_video_server"
 
 RUN set -x && \
   sh -c "echo '#'\!'/bin/bash\nset -e\nsource /opt/ros/${ROS_DISTRO}/setup.bash\nsource /ros2_ws/install/setup.bash\nexec \"\$@\"' > /ros_entrypoint.sh" && \

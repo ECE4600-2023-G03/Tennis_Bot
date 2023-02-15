@@ -1,0 +1,97 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# Camera Parameters. Adjust them!
+#--------------------------------------------------------------------------------------------
+Camera:
+  name: "OAK_D_POE"
+  setup: "stereo"
+  model: "perspective"
+  type: "PinHole"
+
+  # Camera calibration and distortion parameters (OpenCV) 
+  # Copied from the EEPROM data dump in depthai_demo.py.
+  fx: 1.00618351
+  fy: 1.00073998
+  cx: -2.15307310
+  cy: -11.5986022
+
+  k1: 0.0
+  k2: 0.0
+  k3: 0.0
+  k4: 0.0
+  p1: 0.0
+  p2: 0.0
+
+  fx: 1.00463985
+  fy: 1.00073998
+  cx: -2.15307310
+  cy: -1.15986022
+
+  k1: 0.0
+  k2: 0.0
+  k3: 0.0
+  k4: 0.0
+  p1: 0.0
+  p2: 0.0
+
+  bFishEye: 0
+
+  cols: 640
+  rows: 400
+  color_order: "Gray"
+  depth_threshold: 40
+
+  # Camera frames per second 
+  fps: 10.0
+
+  # stereo baseline times fx
+  # This is the colour camera focal * baseline of stereo (7.5cm * 4.81mm)
+  # Not sure if this matters
+  bf: 62.729905701
+
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
+  RGB: 1
+
+# Close/Far threshold. Baseline times.
+# TODO: Investigate
+ThDepth: 37.5
+Feature:
+  name: "default ORB feature extraction setting"
+  scale_factor: 1.2
+  num_levels: 8
+  ini_fast_threshold: 20
+  min_fast_threshold: 7
+
+Mapping:
+  backend: "g2o"
+  baseline_dist_thr: 0.11007784219
+  redundant_obs_ratio_thr: 0.9
+
+Tracking:
+  backend: "g2o"
+
+LoopDetector:
+  backend: "g2o"
+
+Initializer:
+  num_min_triangulated_pts: 100
+
+System:
+  map_format: "msgpack"
+
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#--------------------------------------------------------------------------------------------
+PangolinViewer:
+  keyframe_size: 0.07
+  keyframe_line_width: 1
+  graph_line_width: 1
+  point_size: 2
+  camera_size: 0.08
+  camera_line_width: 3
+  viewpoint_x: 0
+  viewpoint_y: -0.65
+  viewpoint_z: -1.9
+  viewpoint_f: 400

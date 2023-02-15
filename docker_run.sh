@@ -1,7 +1,7 @@
 docker run \
             -it \
             --rm \
-            --name ros2 \
+            --name stella_vslam \
             --env="DISPLAY" \
             --env="QT_X11_NO_MITSHM=1" \
             --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
@@ -13,4 +13,4 @@ docker run \
             -v /dev:/dev \
             --privileged \
             -w /home/G03/workspace \
-            image_tag:latest
+            stella_vslam:latest
