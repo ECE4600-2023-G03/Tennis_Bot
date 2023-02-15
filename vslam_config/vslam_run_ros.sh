@@ -1,0 +1,1 @@
+ros2 run stella_vslam_ros run_slam -v ./vslam_config/FBoW_orb_vocab/orb_vocab.fbow -c ./vslam_config/OAKD_slam_config.yaml --map-db-out ./vslam_config/map.msg -p publish_tf:="false"
