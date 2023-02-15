@@ -162,9 +162,6 @@ RUN set -x && \
   apt-get install -y -qq \
     ros-${ROS_DISTRO}-image-transport \
     ros-${ROS_DISTRO}-cv-bridge \
-    # ROS BAG
-    ros-${ROS_DISTRO}-rosbag2\
-    ros-${ROS_DISTRO}-rosbag2-storage-default-plugins \
     python3-pip \
     python3-colcon-common-extensions && \
   pip3 install -U \
