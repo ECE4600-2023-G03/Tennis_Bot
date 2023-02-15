@@ -155,13 +155,16 @@ RUN set -x && \
   rm -rf CMakeCache.txt CMakeFiles Makefile cmake_install.cmake example src && \
   chmod -R 777 ./*
 
-# ROS2
+# ROS2 (Installs ROSBAG infrastructure, also ros1 -> ros2 bridge)
 RUN set -x && \
   apt-get update -y -qq && \
   : "install ROS2 packages" && \
   apt-get install -y -qq \
     ros-${ROS_DISTRO}-image-transport \
     ros-${ROS_DISTRO}-cv-bridge \
+    # ROS BAG
+    ros-${ROS_DISTRO}-rosbag2\
+    ros-${ROS_DISTRO}-rosbag2-storage-default-plugins \
     python3-pip \
     python3-colcon-common-extensions && \
   pip3 install -U \
@@ -171,16 +174,17 @@ RUN set -x && \
   rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/G03/workspace
+
 COPY . /home/G03/workspace/src/stella_vslam_ros
 
 # SKIPS WEB_VIDEO SERVER
 RUN set -x && \
   : "build ROS2 packages" && \
   bash -c "source /opt/ros/${ROS_DISTRO}/setup.bash; \
-  colcon build --parallel-workers ${NUM_THREADS} --cmake-args \
+  colcon build --parallel-workers ${NUM_THREADS} --cmake-args  \
     -DUSE_PANGOLIN_VIEWER=ON \
     -DUSE_SOCKET_PUBLISHER=OFF \
-    -DUSE_STACK_TRACE_LOGGER=ON \
+    -DUSE_STACK_TRACE_LOGGER=ON \ 
     --packages-skip web_video_server"
 
 RUN set -x && \
