@@ -1,5 +1,9 @@
 Path_Plan:
   ros__parameters:
-    left_speed: 109
-    right_speed: 151
+    left_speed: 110
+    right_speed: 150
     straight_speed: 95
+    pweight: 100
+    min_error: 17
+    max_error: 23
+
