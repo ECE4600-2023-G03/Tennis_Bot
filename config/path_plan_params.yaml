@@ -3,9 +3,10 @@ Path_Plan:
     left_speed: 110
     right_speed: 150
     straight_speed: 95
-    pweight: 40
-    min_error: 18
-    max_error: 25
-    not_centered_width: 0.4
-    centered_width: 0.4
+    pweight: 15
+    iweight: 2
+    min_error: 0
+    max_error: 22
+    not_centered_width: 0.25
+    centered_width: 0.25
 
