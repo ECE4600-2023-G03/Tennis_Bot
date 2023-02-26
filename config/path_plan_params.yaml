@@ -3,8 +3,8 @@ Path_Plan:
     left_speed: 110
     right_speed: 150
     straight_speed: 95
-    pweight: 20.0  # base turning torque "speed" factor
-    iweight: 2.2  # turning torque "acceleration" factor
+    pweight: 17.0  # base turning torque "speed" factor
+    iweight: 1.8  # turning torque "acceleration" factor
     min_torque: 0
     max_torque: 25
     not_centered_width: 0.4
