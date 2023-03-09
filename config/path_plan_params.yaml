@@ -3,9 +3,9 @@ Path_Plan:
     left_speed: 109
     right_speed: 151
     straight_speed: 95
-    pweight: 16.0  # base turning torque "speed" factor
-    iweight: 1.5  # turning torque "acceleration" factor
-    close_multplier: 1.2  # torque multiplier for when ball is close
+    pweight: 12.5  # base turning torque "speed" factor
+    iweight: 0.9  # turning torque "acceleration" factor
+    close_multplier: 0.85  # torque multiplier for when ball is close
     min_torque: 0
     max_torque: 30
     not_centered_width: 0.65
