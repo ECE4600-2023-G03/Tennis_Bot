@@ -32,7 +32,8 @@ def generate_launch_description():
     )
     pilot = Node(
         package="pilot",
-        executable="pilot"
+        executable="pilot",
+        parameters=['/home/G03/workspace/config/manual_params.yaml']
     )
 
     state_machine = Node(
